@@ -1,2 +1,0 @@
-# react-birthday-reminder
- 
