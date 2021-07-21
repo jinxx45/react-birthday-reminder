@@ -1,15 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap");
 
-* {
-  box-sizing: border-box;
+.main-content {
+  height: 100vh;
 }
 
-html {
-  font-family: 'Noto Sans JP', sans-serif;
+.image-bg {
+  background-image: url("./Images/birthdayBackGround.jpg");
+  background-size: cover;
+  width: 100%;
+  background-repeat: no-repeat;
 }
 
-body {
-  margin: 0;
-  background-color: #3f3f3f;
+.blur {
+  background: rgba(6, 121, 141, 0.2);
+  backdrop-filter: blur(2px);
+  height: 100vh;
+  width: 100%;
 }
 
+.main-card {
+  font-family: "Zen Loop", cursive;
+  margin-top: 9%;
+  height: 50%;
+  width: 50%;
+  border-radius: 15px;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+}
