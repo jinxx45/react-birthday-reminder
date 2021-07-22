@@ -7,6 +7,7 @@ import {
 
 
 import LandingPage from "./Pages/LandingPage";
+import MainPage from "./Pages/MainPage";
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/birthdays">
-           Hi
+            <MainPage/>
           </Route>
           <Route path="/">
             <LandingPage/>
