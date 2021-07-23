@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 
+import BirthdayModal from './BirthdayModal'
+
 function Navbar() {
     return (
         <div>
@@ -20,9 +22,16 @@ function Navbar() {
       <li class="nav-item">
         <a class="nav-link" href="#">This Month</a>
       </li>
+      <ul class="navbar-nav ml-auto" >
+      <li >
+      <BirthdayModal/>
+      </li>
+      </ul>
+     
     </ul>
   </div>
 </nav>
+      
         </div>
     )
 }

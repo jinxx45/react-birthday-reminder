@@ -2,6 +2,8 @@ import React from 'react'
 
 import DP from '../Images/bdayappJinx.jpg'
 
+
+
 function BirthdayCard() {
     return (
         <div>
