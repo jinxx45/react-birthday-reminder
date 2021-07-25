@@ -3,7 +3,8 @@ import {useState} from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import ImageUpload from './ImageUpload';
+import { useEffect } from 'react';
+import FileBase64 from 'react-file-base64';
 
 function MyVerticallyCenteredModal(props) {
   const [startDate, setStartDate] = useState(new Date());
@@ -28,7 +29,7 @@ function MyVerticallyCenteredModal(props) {
   <label className="mt-4" htmlFor="">Birthday Date : </label>
   <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
       <br />
-  <ImageUpload/>
+      <input type="file" />
     
   <button type="submit" class="btn btn-info">Add</button>
 </form>

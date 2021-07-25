@@ -8,14 +8,7 @@ router.get('/', (req, res) => {
 
 
 
-//adding a New User
-router.post('/adduser',actions.addNew)
-
-//authenticating a user
-router.post('/authenticate',actions.authenticate)
-
-//getting information about the user
-
-router.get('/getinfo',actions.getinfo)
+//adding a New Birthday
+router.post('/addBirthday',actions.addBirthday)
 
 module.exports = router
