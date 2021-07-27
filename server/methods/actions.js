@@ -1,19 +1,6 @@
 var Birthday = require('../models/Birthday')
 var config = require('../config/dbconfig')
-const multer = require('multer')
 
-const storage = multer.diskStorage({
-    destination: function(req,file,cb)
-    {
-        cb(null,'./uploads/');
-    },
-    filename : function(req,file,cb)
-    {
-        cb(null,new Date().toISOString() + file.originalname)
-    }
-})
-
-const upload = multer({dest:'uploads/'})
 
 var functions=
 {
