@@ -1,16 +1,43 @@
 import {Modal , Button} from 'react-bootstrap'
-import {useState} from 'react'
+import {Component, useState} from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useEffect } from 'react';
-import FileBase64 from 'react-file-base64';
+import axios from 'axios';
 
-function MyVerticallyCenteredModal(props) {
-  const [startDate, setStartDate] = useState(new Date());
+
+class  MyVerticallyCenteredModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state ={
+        file: null
+    };
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+}
+onFormSubmit(e){
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('myImage',this.state.file);
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    };
+    axios.post("/upload",formData,config)
+        .then((response) => {
+            alert("The file is successfully uploaded");
+        }).catch((error) => {
+    });
+}
+onChange(e) {
+    this.setState({file:e.target.files[0]});
+}
+
+    render(){  
     return (
       <Modal
-        {...props}
+        {...this.props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -24,22 +51,24 @@ function MyVerticallyCenteredModal(props) {
 <form>
   <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name : "/>
+    <input onChange={(e)=>this.state.setState({name:e.target.value})} type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name : "/>
   </div>
   <label className="mt-4" htmlFor="">Birthday Date : </label>
-  <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+  <DatePicker selected={this.state.startDate} onChange={(date) => this.state.setState({startDate:date})} />
       <br />
-      <input type="file" />
+      <input type="file" onChange={this.onChange}/>
     
-  <button type="submit" class="btn btn-info">Add</button>
+  <button type="submit" onClick={this.onFormSubmit} class="btn btn-info">Add</button>
 </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={props.onHide}>Close</Button>
+          <Button variant="danger" onClick={this.props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     );
   }
+}
+
   
   function BirthdayModal() {
     const [modalShow, setModalShow] = useState(false);

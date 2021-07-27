@@ -1,11 +1,25 @@
 var Birthday = require('../models/Birthday')
-
 var config = require('../config/dbconfig')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function(req,file,cb)
+    {
+        cb(null,'./uploads/');
+    },
+    filename : function(req,file,cb)
+    {
+        cb(null,new Date().toISOString() + file.originalname)
+    }
+})
+
+const upload = multer({dest:'uploads/'})
 
 var functions=
 {
-    addBirthday : function(req,res)
+    addBirthday :upload.single('file'), function(req,res)
     {
+        console.log(req.file);
         if(!(req.body.name) || !(req.body.image) || !(req.body.date))
         {
             res.json({success : false , msg :'Enter all Fields'})
