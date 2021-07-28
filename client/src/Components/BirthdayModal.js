@@ -10,7 +10,9 @@ class  MyVerticallyCenteredModal extends Component {
   constructor(props) {
     super(props);
     this.state ={
-        file: null
+        file: null,
+        name: null,
+        startDate:null,
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -18,13 +20,17 @@ class  MyVerticallyCenteredModal extends Component {
 onFormSubmit(e){
     e.preventDefault();
     const formData = new FormData();
-    formData.append('myImage',this.state.file);
+    formData.append('file',this.state.file);
+    formData.append('name',this.state.name);
+    formData.append('date',this.state.startDate);
+
     const config = {
         headers: {
             'content-type': 'multipart/form-data'
         }
     };
-    axios.post("/upload",formData,config)
+    console.log(formData);
+    axios.post("http://localhost:5000/addBirthday",formData,config)
         .then((response) => {
             alert("The file is successfully uploaded");
         }).catch((error) => {
@@ -51,12 +57,12 @@ onChange(e) {
 <form>
   <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
-    <input onChange={(e)=>this.state.setState({name:e.target.value})} type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name : "/>
+    <input name="name" onChange={(e)=>{this.setState({name:e.target.value})}} type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name : "/>
   </div>
   <label className="mt-4" htmlFor="">Birthday Date : </label>
-  <DatePicker selected={this.state.startDate} onChange={(date) => this.state.setState({startDate:date})} />
+  <DatePicker name="date" selected={this.startDate} onChange={(date) => this.setState({startDate:date})} />
       <br />
-      <input type="file" onChange={this.onChange}/>
+      <input type="file" name="file" onChange={this.onChange}/>
     
   <button type="submit" onClick={this.onFormSubmit} class="btn btn-info">Add</button>
 </form>
